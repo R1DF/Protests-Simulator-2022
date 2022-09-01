@@ -45,27 +45,3 @@ class Field:
 			for x in range(self.extent_x):
 				self.field[column].append(Location((x, column)))
 
-		# Defining field locations
-		## Shops
-		for i in range(len(RAND_SHOPS_COORDS)):
-			selected_coords = choice(RAND_SHOPS_COORDS[i])
-			print(i, selected_coords)
-			self.field[selected_coords[0]][selected_coords[1]].determine_contents("SHOP", selected_coords)
-
-		## Houses
-		for i in range(len(HOUSES_COORDS)):
-			selected_coords = HOUSES_COORDS[i]
-			self.field[selected_coords[0]][selected_coords[1]].determine_contents("HOUSE", selected_coords)
-
-		## Offices
-		for i in range(len(OFFICE_COORDS)):
-			selected_coords = OFFICE_COORDS[i]
-			self.field[selected_coords[0]][selected_coords[1]].determine_contents("OFFICE", selected_coords)
-
-		## Parking spot
-		parking_spot_coords = choice(RAND_PARKING_COORDS)
-		self.field[parking_spot_coords[0]][parking_spot_coords[1]].determine_contents("PARKING", parking_spot_coords)
-
-		## Hospital
-		self.field[HOSPITAL_COORDS[0]][HOSPITAL_COORDS[1]].determine_contents("HOSPITAL", HOSPITAL_COORDS)
-
