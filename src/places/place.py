@@ -6,4 +6,3 @@ class Place:
 	def __init__(self, coords, master=None):
 		self.master = master
 		self.location_x, self.location_y = coords
-		

@@ -1,5 +1,5 @@
 # Importing blueprint
-from place import Place
+from .place import Place
 
 # Ulken Sharshy class
 class UlkenSharshy(Place):

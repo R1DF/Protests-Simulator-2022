@@ -1,10 +1,9 @@
 # Importing all places
-from house import House
-from hospital import Hospital
-from parking import ParkingSpot
-from office import Office
-from shop import Shop
-from us import UlkenSharshy
+from places.hospital import Hospital
+from places.parking import ParkingSpot
+from places.office import Office
+from places.shop import Shop
+from places.us import UlkenSharshy
 
 # Location class
 class Location:
@@ -24,7 +23,7 @@ class Location:
 			
 		elif contents_type == "ULKENSHARSHY":
 			self.contents = UlkenSharshy(coords)
-			
+
 		elif contents_type == "PARKING":
 			self.contents = ParkingSpot(coords)
 

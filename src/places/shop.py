@@ -1,5 +1,5 @@
 # Importing blueprint
-from place import Place
+from .place import Place
 
 # Shop class
 class Shop(Place):
