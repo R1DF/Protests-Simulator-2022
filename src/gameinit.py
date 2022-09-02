@@ -7,5 +7,5 @@ from random import choice
 class Game:
 	def __init__(self):
 		self.field = Field()
-		self.player = Player(choice(RAND_PLAYER_COORDS))
+		#self.player = Player(choice())
 		
