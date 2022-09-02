@@ -9,7 +9,13 @@ Making this small text-based game as a CS project. Your job is simple: Get a wat
 from coltext import *
 from gameinit import Game
 
-# Introduction
+# Debug - write below this comment for any debugging and set the "debug" variable to True
+debug = False
+
+# Program code
+if debug:
+    quit()
+
 clear()
 print("""
 Protests Simulator 2022
