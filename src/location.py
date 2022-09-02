@@ -1,5 +1,6 @@
 # Importing all places
 from house import House
+from hospital import Hospital
 from parking import ParkingSpot
 from office import Office
 from shop import Shop
