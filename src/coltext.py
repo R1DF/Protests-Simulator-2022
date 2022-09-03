@@ -1,6 +1,6 @@
 # Getting colorama
 from colorama import init, Fore, Style
-from os import name, system # For clearing
+from os import name, system  # For clearing
 init()
 
 # Functions
@@ -18,7 +18,7 @@ def colformat_map(map):
 	).replace(
 		"OFF", Fore.BLUE + "OFF" + Style.RESET_ALL
 	).replace(
-		"HOS", Fore.RED + "RED" + Style.RESET_ALL
+		"HOS", Fore.RED + "HOS" + Style.RESET_ALL
 	).replace(
 		"SHO", Fore.CYAN + "SHO" + Style.RESET_ALL
 	).replace(
