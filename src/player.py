@@ -1,3 +1,8 @@
+# Imports for coords randomization
+import json
+import os
+import random
+
 # Player class
 class Player:
 	def __init__(self, name, coordinates):
@@ -6,8 +11,9 @@ class Player:
 		self.x, self.y = coordinates  # The player starts at a randomized location but that's not done here
 		self.attack, self.defense = 7, 7  # nasty def keyword forbids me from contracting the names
 		self.health = 100
-		self.luck = 7 # will make your life ten times harder when you're about to die
+		self.luck = 7  # will make your life ten times harder when you're about to die
 		self.inventory = []  # can only hold 2 things at a time
+		self.score = 0
 
 	def get_status(self):
 		if self.health >= 75:
@@ -20,4 +26,9 @@ class Player:
 			return "close to nde"
 		else:
 			return "dead"
+
+	@staticmethod
+	def make_random_coords():
+		return random.choice(json.load(open(os.getcwd() + "\\coords.json", "r"))["player"])
+
 	
