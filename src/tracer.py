@@ -7,6 +7,27 @@ from random import choice
 class CommandTracer:
     def __init__(self, master):
         self.master = master
+        self.compass_directions = (
+            "EAST",
+            "WEST",
+            "NORTH",
+            "SOUTH",
+            "NORTHEAST",
+            "NORTHWEST",
+            "SOUTHEAST",
+            "SOUTHWEST"
+        )
+        self.compass_direction_contractions = (
+            "E",
+            "W",
+            "N",
+            "S",
+            "NE",
+            "NW",
+            "SE",
+            "SW"
+        )
+        self._naughty_words = ("FUCK", "SHIT", "ASS", "DICK", "COCK", "PUSSY", "BITCH")
 
     def trace(self, command):
         if command == "HELP":
@@ -61,6 +82,16 @@ class CommandTracer:
 
         elif command == "SCORE":
             print("Score:", self.master.player.score)
+
+        elif command in self.compass_directions or command in self.compass_direction_contractions: # longer to check so it goes last
+            direction = command.lower() if command in self.compass_direction_contractions else self.compass_direction_contractions[self.compass_directions.index(command)].lower()
+            if self.master.player.check_movement(direction):
+                self.master.player.move(direction)
+            else:
+                print(choice(["Let's stop here.", "You can't move further.", "You have reached the map limits. Go somewhere else."]))
+
+        elif command in self._naughty_words:
+            print(choice(["Jeez...", "You ok?", "Language."]))
 
         elif command == "":
             print(choice(["... Gonna say something?", "I'm waiting.", "Sometimes silence is louder than words...", "You sure do wait a lot."]))
