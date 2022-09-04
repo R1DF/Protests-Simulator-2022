@@ -1,0 +1,14 @@
+General
+#HELP| - Gives you this menu.
+#WHERE|, #MAP| - Shows your location on the game map.
+#TIDY|, #CLEAR|, #CLS| - Clears the screen for you.
+
+Controls
+#N|/#NORTH|, #E|/#EAST|, #S|/#SOUTH|, #W|/#WEST|, #NE|/#NORTHEAST|, #NW|/#NORTHWEST, #SE|/#SOUTHEAST|, #SW|/#SOUTHWEST| - Commands for movement.
+#LOOK| - Look around and see what the place offers.
+#EQUIP| - Equip an item which is nearby. You can only hold two things.
+#UNEQUIP| - Put back an item that you're holding.
+#INV|/#INVENTORY| - Prints out what you're holding at the moment.
+#STATUS| - Gives you a summary of your health.
+#ME|, #DETAILS| - Gives out your full character statistics and details.
+#SCORE| - Gives out your score.
