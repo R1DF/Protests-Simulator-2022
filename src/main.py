@@ -26,7 +26,6 @@ Protests Simulator 2022 (running v1.0.0 indefinite)
 Your objective throughout this game is to get a water bottle while mass protests happen around the city. Beware enemies and get back safely.
 This game was based on the January 2022 unrest that occurred in Kazakhstan and has been made as a Computer Science project.
 """)
-input("\nPress Enter to begin.\n")
 
 # Making the player
 name = force_request("Enter your name: ")
