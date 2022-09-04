@@ -12,3 +12,9 @@ Controls
 #STATUS| - Gives you a summary of your health.
 #ME|, #DETAILS| - Gives out your full character statistics and details.
 #SCORE| - Gives out your score.
+
+Combat
+#ATK|, #ATTACK| - Fight with the weapon you are currently holding. If you don't have one, you'll end up using your fists.
+#DEF|, #DEFEND| - Defend yourself with a shield. If you don't have one, you'll just wing it.
+#INV|, #INVENTORY| - Take a look inside what you have.
+#FLEE|, #RETREAT| - Bet on your luck and flee.
