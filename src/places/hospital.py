@@ -9,4 +9,5 @@ class Hospital(Place):
 
 		# Getting place name
 		self.name = "HOSPITAL"
+		self.display_name = "Hospital"
 

@@ -4,6 +4,10 @@ This class exists as a parent class for every other location type. Do not confus
 
 class Place:
 	def __init__(self, coords, master=None):
+		# Initialization
 		self.master = master
 		self.location_x, self.location_y = coords
 		self.name = None
+		self.display_name = None
+		self.contents = []
+		self.description = ""
