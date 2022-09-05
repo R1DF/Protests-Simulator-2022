@@ -8,7 +8,40 @@ def clear():
 	system("cls" if name == "nt" else "clear")
 
 def colformat(file_data):
-	return file_data.replace("#", Fore.BLUE).replace("|", Style.RESET_ALL)
+	return file_data.replace(
+		"B#", Fore.BLUE
+	).replace(
+		"R#", Fore.RED
+	).replace(
+		"G#", Fore.GREEN
+	).replace(
+		"Y#", Fore.YELLOW
+	).replace(
+		"M#", Fore.MAGENTA
+	).replace(
+		"C#", Fore.CYAN
+	).replace(
+		"~|", Style.RESET_ALL
+	)
+
+def detformat(file_data, player):
+	return colformat(file_data).replace(
+		"(USER)", player.name
+	).replace(
+		"(HP)", str(player.health)
+	).replace(
+		"(SCORE)", str(player.score)
+	).replace(
+		"(LUCK)", str(player.luck)
+	).replace(
+		"(ATK)", str(player.attack)
+	).replace(
+		"(DEF)", str(player.defense)
+	).replace(
+		"(X)", str(player.x + 1)
+	).replace(
+		"(Y)", str(player.y + 1)
+	)
 
 def colformat_map(map):
 	return map.replace(
