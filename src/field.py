@@ -13,6 +13,7 @@ class Field:
 		# Initialization
 		self.extent_x, self.extent_y = 8, 6
 		self.field = []
+		self.parking_spot_coords = None  # necessary for game to end
 
 		# Making field
 		self.make_field()
@@ -43,8 +44,8 @@ class Field:
 		self.field[coords[1]][coords[0]].determine_contents("HOSPITAL", coords)
 
 		# There's only one parking spot, but its location is randomly picked.
-		parking_spot_coords = choice(coords_data["parking_spots"])
-		self.field[parking_spot_coords[1]][parking_spot_coords[0]].determine_contents("PARKING", parking_spot_coords)
+		self.parking_spot_coords = choice(coords_data["parking_spots"])
+		self.field[self.parking_spot_coords[1]][self.parking_spot_coords[0]].determine_contents("PARKING", self.parking_spot_coords)
 
 		# The Ulken Sharshy is technically the same place but the code has a clever way to mask it.
 		for coords in coords_data["ulken_sharshy"]:
