@@ -11,8 +11,9 @@ class Player:
 		self.x, self.y = coordinates  # The player starts at a randomized location but that's not done here
 		self.attack, self.defense = 7, 7  # nasty def keyword forbids me from contracting the names
 		self.health = 100
-		self.luck = 7  # will make your life ten times harder when you're about to die
+		self.luck = 80  # will make your life ten times harder when you're about to die
 		self.inventory = []  # can only hold 2 things at a time
+		self.food_bag = []  # extra space, only for food
 		self.score = 0
 
 	def get_status(self):
@@ -31,29 +32,14 @@ class Player:
 		match direction:
 			case "e":
 				return self.x != 0
-
 			case "w":
 				return self.x != 7
-
 			case "n":
 				return self.y != 0
-
 			case "s":
 				return self.y != 5
-
 			case _:
 				return self.check_movement(direction[0]) and self.check_movement(direction[1])
-
-		# if direction == "e":
-		# 	return self.x != 0
-		# elif direction == "w":
-		# 	return self.x != 7
-		# elif direction == "n":
-		# 	return self.y != 0
-		# elif direction == "s":
-		# 	return self.y != 5
-		# elif len(direction) == 2:  # NE, NW, SE, SW
-		# 	return self.check_movement(direction[0]) and self.check_movement(direction[1])
 
 	def move(self, direction):
 		for direction in direction:
@@ -67,8 +53,10 @@ class Player:
 				case "s":
 					self.y += 1
 
+	def get_cause_of_death(self):
+		pass
+
 	@staticmethod
 	def make_random_coords():
 		return random.choice(json.load(open(os.getcwd() + "\\coords.json", "r"))["player"])
 
-	
