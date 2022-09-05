@@ -28,6 +28,7 @@ class CommandTracer:
             "SW"
         )
         self._naughty_words = ("FUCK", "SHIT", "ASS", "DICK", "COCK", "PUSSY", "BITCH")
+        self.fight_words = ("ATK", "ATTACK", "DEF", "DEFEND", "FLEE", "RETREAT")
 
     def trace(self, command):
         if command == "HELP":
@@ -46,7 +47,7 @@ class CommandTracer:
             else:
                 print(self.master.player.name + "'s inventory:")
                 for item in self.master.player.inventory:
-                    print(item.name)
+                    print(item.display_name)
 
         elif command == "STATUS":
             # Variables to not overuse
@@ -80,15 +81,24 @@ class CommandTracer:
             # Printing the things out
             print(f"HP: {hp}\nStatus: {status.title() if 'nde' not in status else status.title().replace('Nde', 'NDE')}\n{choice(detail) if hp < 100 else detail}")
 
+        elif command in ["ME", "DETAILS"]:
+            print(coltext.detformat(open(os.getcwd() + "\\txt\\details.txt", "r").read(), self.master.player))
+
         elif command == "SCORE":
             print("Score:", self.master.player.score)
 
-        elif command in self.compass_directions or command in self.compass_direction_contractions: # longer to check so it goes last
+        elif command in self.compass_directions or command in self.compass_direction_contractions:  # longer to check so it goes last
             direction = command.lower() if command in self.compass_direction_contractions else self.compass_direction_contractions[self.compass_directions.index(command)].lower()
+            contraction = self.compass_directions[self.compass_direction_contractions.index(direction.upper())].lower()
+
             if self.master.player.check_movement(direction):
                 self.master.player.move(direction)
+                print(f"You moved to the {contraction}.")
             else:
                 print(choice(["Let's stop here.", "You can't move further.", "You have reached the map limits. Go somewhere else."]))
+
+        elif command in self.fight_words:
+            print("You're not fighting right now.")
 
         elif command in self._naughty_words:
             print(choice(["Jeez...", "You ok?", "Language."]))
