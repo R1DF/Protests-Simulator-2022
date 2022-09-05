@@ -1,0 +1,16 @@
+C#(USER)~|'s statistics:
+Health: R#(HP)~|
+Score: B#(SCORE)~|
+Luck: M#(LUCK)~|
+
+Attack: R#(ATK)~|
+Equipped with R#(EQUIPPED_SWORD)~|.
+
+Defense: B#(DEF)~|
+Equipped with B#(EQUIPPED_SHIELD)~|.
+
+Inventory contents:
+Y#(INVENTORY_CONTENTS)~|
+Y#(FOOD_CONTENTS)~|
+
+You are currently at the coordinate B#((X), (Y))~| of the map.
