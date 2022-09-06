@@ -22,7 +22,7 @@ class Player:
 		elif 50 <= self.health < 75:
 			return "vulnerable"
 		elif 25 <= self.health < 50:
-			return "in trouble"
+			return "facing trouble"
 		elif 0 < self.health < 25:
 			return "close to nde"
 		else:
@@ -31,9 +31,9 @@ class Player:
 	def check_movement(self, direction):
 		match direction:
 			case "e":
-				return self.x != 0
-			case "w":
 				return self.x != 7
+			case "w":
+				return self.x != 0
 			case "n":
 				return self.y != 0
 			case "s":
@@ -45,9 +45,9 @@ class Player:
 		for direction in direction:
 			match direction:
 				case "e":
-					self.x -= 1
-				case "w":
 					self.x += 1
+				case "w":
+					self.x -= 1
 				case "n":
 					self.y -= 1
 				case "s":
