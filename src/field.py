@@ -1,6 +1,9 @@
-# Imports
-import json
+# Internal imports
 from location import Location
+from item_dropper import ItemDropper
+
+# Package imports
+import json
 from random import choice
 from os import getcwd
 
@@ -9,11 +12,13 @@ coords_data = json.load(open(getcwd() + "\\coords.json", "r"))
 
 # Field class
 class Field:
-	def __init__(self):
+	def __init__(self, player):
 		# Initialization
 		self.extent_x, self.extent_y = 8, 6
 		self.field = []
 		self.parking_spot_coords = None  # necessary for game to end
+		self.player = player  # for ItemDropper
+		self.item_dropper = ItemDropper(self.player)
 
 		# Making field
 		self.make_field()
@@ -38,6 +43,9 @@ class Field:
 				self.field[coords[1]][coords[0]].determine_contents(
 					"HOUSE" if locations == "houses" else "OFFICE", coords
 				)
+				self.item_dropper.randomize(self.field[coords[1]][coords[0]].contents)
+
+
 
 		# There is only one hospital.
 		coords = coords_data["hospital"]
