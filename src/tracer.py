@@ -41,6 +41,13 @@ class CommandTracer:
         elif command == "MAP" or command == "WHERE":
             self.master.return_map()
 
+        elif command == "LOOK":
+            if self.master.field.field[self.master.player.y][self.master.player.x].contents is not None:
+                print("You take a look around the place.")
+                self.master.field.field[self.master.player.y][self.master.player.x].contents.show_contents()  # jeez this is big
+            else:
+                print("You're located in the streets.")
+
         elif command == "INV" or command == "INVENTORY":
             if not self.master.player.inventory:  # falsey values??? bruh I thought that was in JS only
                 print("You're not holding anything.")
@@ -85,7 +92,7 @@ class CommandTracer:
             print(coltext.detformat(open(os.getcwd() + "\\txt\\details.txt", "r").read(), self.master.player))
 
         elif command == "SCORE":
-            print("Score:", self.master.player.score)
+            coltext.announce(f"Score: {self.master.player.score}")
 
         elif command in self.compass_directions or command in self.compass_direction_contractions:  # longer to check so it goes last
             direction = command.lower() if command in self.compass_direction_contractions else self.compass_direction_contractions[self.compass_directions.index(command)].lower()
@@ -94,17 +101,20 @@ class CommandTracer:
             if self.master.player.check_movement(direction):
                 self.master.player.move(direction)
                 print(f"You moved to the {contraction}.")
+                if self.master.field.field[self.master.player.y][self.master.player.x].contents is not None:
+                    print("\n")
+                    self.master.field.field[self.master.player.y][self.master.player.x].contents.disclose()
             else:
-                print(choice(["Let's stop here.", "You can't move further.", "You have reached the map limits. Go somewhere else."]))
+                coltext.alarm(choice(["Let's stop here.", "You can't move further.", "You have reached the map limits. Go somewhere else."]))
 
         elif command in self.fight_words:
-            print("You're not fighting right now.")
+            coltext.alarm("You're not fighting right now.")
 
         elif command in self._naughty_words:
-            print(choice(["Jeez...", "You ok?", "Language."]))
+            coltext.alarm(choice(["Jeez...", "You ok?", "Language."]))
 
         elif command == "":
-            print(choice(["... Gonna say something?", "I'm waiting.", "Sometimes silence is louder than words...", "You sure do wait a lot."]))
+            coltext.alarm(choice(["... Gonna say something?", "I'm waiting.", "Sometimes silence is louder than words...", "You sure do wait a lot."]))
 
         else:
-            print("Invalid command. Enter \"HELP\" for a list of valid commands.")
+            print(coltext.colformat("R#Invalid command. Enter~| B#\"HELP\"~| R#for a list of valid commands.~|"))
