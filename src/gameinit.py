@@ -8,8 +8,8 @@ from tracer import CommandTracer
 class Game:
 	def __init__(self, player_name):
 		# Making necessary attributes
-		self.field = Field()
 		self.player = Player(player_name[0].upper() + player_name[1:], Player.make_random_coords())
+		self.field = Field(self.player)
 		self.command_tracer = CommandTracer(self)
 
 		# Giving help note
@@ -56,6 +56,7 @@ class Game:
 
 		# Index
 		print(coltext.colformat_map("""
+Key:
 YOU - You are here
 SHO - Shop
 OFF - Office
@@ -63,6 +64,8 @@ HOS - Hospital
 PAR - Parking spot
 HOU - House
 ULK - The Ulken Sharshy"""))
-
-
-
+		player_location = self.field.field[self.player.y][self.player.x]
+		if player_location.contents is not None:
+			print(f"You are in {player_location.contents.article} {player_location.contents.display_name.lower() if player_location.contents.display_name != 'Ulken Sharshy' else player_location.contents.display_name}.")
+		else:
+			print("You're outside.")
