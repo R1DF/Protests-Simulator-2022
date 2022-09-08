@@ -9,4 +9,6 @@ class ParkingSpot(Place):
 
 		# Getting place name
 		self.name = "PARKING"
+		self.display_name = "Parking Spot"
+		self.description = "This is the place where you can depart from. Hurry."
 
