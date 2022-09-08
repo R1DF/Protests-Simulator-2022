@@ -6,8 +6,10 @@ B#TIDY~|, B#CLEAR~|, B#CLS~| - Clears the screen for you.
 Controls
 B#N~|/B#NORTH~|, B#E~|/B#EAST~|, B#S~|/B#SOUTH~|, B#W~|/B#WEST~|, B#NE~|/B#NORTHEAST~|, B#NW~|/B#NORTHWEST, B#SE~|/B#SOUTHEAST~|, B#SW~|/B#SOUTHWEST~| - Commands for movement.
 B#LOOK~| - Look around and see what the place offers.
-B#EQUIP~| - Equip an item which is nearby. You can only hold two things.
-B#UNEQUIP~| - Put back an item that you're holding.
+B#TAKE~| - Take something from the scene.
+B#PUT DOWN~| - Put something you have in your hands back down.
+B#EQUIP~| - Equip an item that you're holding. You can only equip one sword and one shield.
+B#UNEQUIP~| - Unequip a sword or a shield that you're holding.
 B#INV~|/B#INVENTORY~| - Prints out what you're holding at the moment.
 B#STATUS~| - Gives you a summary of your health.
 B#ME~|, B#DETAILS~| - Gives out your full character statistics and details.
