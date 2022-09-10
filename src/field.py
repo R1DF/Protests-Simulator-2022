@@ -22,12 +22,46 @@ class Field:
 
 		# Making field
 		self.make_field()
+		self.make_item_distributions()
 		self.generate_places()
 
 	def make_field(self):
 		for column in range(self.extent_y):
 			self.field.append([Location((x, column)) for x in range(self.extent_x)])  # Tried using a one-liner but it placed references
 			# 2D lists have this order: [column][row]
+
+	def make_item_distributions(self):
+		self.house_and_office_items = (  # Weapons and shields spawn differently, only one per random place
+			("APPLE", 2),  # the 2 signifies how much of apples can there be
+			("BREAD", 2),
+			("POTATO", 2),
+			("DICE_OF_FATE", 1),
+			("MEDKIT", 0)
+		)
+
+		self.house_and_office_rng_values = (  # out of 100
+			75,
+			75,
+			15,
+			60,
+			0
+		)
+
+		self.hospital_items = (  # Weapons and shields spawn differently, only one per random place
+			("APPLE", 1),  # the 2 signifies how much of apples can there be
+			("BREAD", 1),
+			("POTATO", 0),
+			("DICE_OF_FATE", 0),
+			("MEDKIT", 2)
+		)
+
+		self.hospital_rng_values = (  # out of 100
+			33,
+			33,
+			0,
+			0,
+			80
+		)
 
 	def generate_places(self):
 		coords_data = json.load(open(getcwd() + "\\coords.json", "r"))
@@ -38,6 +72,7 @@ class Field:
 			self.field[coords[1]][coords[0]].determine_contents("SHOP", coords)
 
 		# Houses and offices have predetermined coordinates, but they're all over the place.
+		self.item_dropper.set_items_and_rng(self.house_and_office_items, self.house_and_office_rng_values)
 		for locations in ["houses", "offices"]:
 			for coords in coords_data[locations]:
 				self.field[coords[1]][coords[0]].determine_contents(
@@ -50,6 +85,8 @@ class Field:
 		# There is only one hospital.
 		coords = coords_data["hospital"]
 		self.field[coords[1]][coords[0]].determine_contents("HOSPITAL", coords)
+		self.item_dropper.set_items_and_rng(self.hospital_items, self.hospital_rng_values)
+		self.item_dropper.randomize(self.field[coords[1]][coords[0]].contents)
 
 		# There's only one parking spot, but its location is randomly picked.
 		self.parking_spot_coords = choice(coords_data["parking_spots"])

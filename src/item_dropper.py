@@ -11,25 +11,31 @@ from items.apple import Apple
 from items.bread import Bread
 from items.potato import Potato
 from items.dice_of_fate import DiceOfFate
+from items.medkit import Medkit
 
 
 # Item Dropper blueprint
 class ItemDropper:
     def __init__(self, player):
         self.player = player
-        self.items = (  # Weapons and shields spawn differently, only one per random place
-            ("APPLE", 2),  # the 2 signifies how much of apples can there be
-            ("BREAD", 2),
-            ("POTATO", 2),
-            ("DICE_OF_FATE", 1)
+        self.items = (
+            ("APPLE", 0),
+            ("BREAD", 0),
+            ("POTATO", 0),
+            ("DICE_OF_FATE", 0),
+            ("MEDKIT", 0)
         )
+        self.rng_values = (
+            0,
+            0,
+            0,
+            0,
+            0
+        )
+    def set_items_and_rng(self, items, rng_values):
+        self.items = items
+        self.rng_values = rng_values
 
-        self.rng_values = (  # out of 100
-            75,
-            75,
-            15,
-            60
-        )
 
     def randomize(self, place: Place = None):
         # Randomizing
@@ -51,6 +57,8 @@ class ItemDropper:
                     place.contents.append(Potato(self.player))
                 case "DICE_OF_FATE":
                     place.contents.append(DiceOfFate(self.player))
+                case "MEDKIT":
+                    place.contents.append(Medkit(self.player))
                 case _:
                     pass
 
