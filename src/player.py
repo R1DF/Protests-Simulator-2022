@@ -2,6 +2,8 @@
 import json
 import os
 import random
+import coltext
+from items.item import display_name_to_text
 
 # Player class
 class Player:
@@ -13,7 +15,7 @@ class Player:
 		self.health = 100
 		self.luck = 80  # will make your life ten times harder when you're about to die
 		self.inventory = []  # can only hold 2 things at a time
-		self.food_bag = []  # extra space, only for food
+		self.consumables = []  # extra space, only for food and other stuff
 		self.score = 0
 
 	def get_status(self):
@@ -53,8 +55,75 @@ class Player:
 				case "s":
 					self.y += 1
 
-	def get_cause_of_death(self):
-		pass
+	def get_holdings(self):
+		# Weapons and shields
+		print(coltext.colformat("C#Inventory:~|"))
+		if not self.inventory:
+			print("There is nothing in your inventory.")
+		else:
+			for item in self.inventory:
+				print(f"{item.name}f{' (equipped)' if item.equipped else ''}")  # status -> (equipped, not)
+
+		# Consumables
+		print(coltext.colformat("\nC#Consumables:~|"))
+		if not self.consumables:
+			print("You don't have any consumables.")
+		else:
+
+			items_and_amounts = {
+				"APPLE": 0,
+				"BREAD": 0,
+				"POTATO": 0,
+				"DICE_OF_FATE": 0
+			}
+
+			for item in self.consumables:
+				items_and_amounts[item.name] += 1
+
+			for item in items_and_amounts:
+				if items_and_amounts[item] != 0:
+					print(f"{display_name_to_text[item]} x{items_and_amounts[item]}")
+
+	def handle_put_down_query(self, place):
+		# Showing what the person already has
+		self.get_holdings()
+
+		# Handling query
+		item = coltext.force_request("\nEnter the item you want to leave and its amount (default is 1) (e.g. water 2): ").split()
+		inventory_names = [x.display_name.lower() for x in self.inventory]
+		consumables_names = [x.display_name.lower() for x in self.consumables]
+		holdings = inventory_names + consumables_names
+
+		# Getting item and amount from input
+		if item[-1].isnumeric():
+			amount = int(item[-1])
+			item_name = " ".join(item[:-1])
+
+		else:
+			amount = 1
+			item_name = " ".join(item)
+
+		# Checking if item exists
+		if item_name.lower() in holdings:
+			if holdings.count(item_name.lower()) >= amount:
+				if item_name in consumables_names:
+					for item_object in range(amount):
+						exact_item = self.consumables[consumables_names.index(item_name)]
+						place.contents.append(exact_item)
+						self.consumables.remove(exact_item)
+
+				else:
+					for item_object in range(amount):
+						exact_item = self.inventory[inventory_names.index(item_name)]
+						place.contents.append(exact_item)
+						self.consumables.remove(exact_item)
+
+				# Notifying
+				print(f"You left the item{'s' if amount>1 else ''}. Your inventory has been updated.")
+			else:
+				coltext.alarm("Bold of you to assume you have that many.")
+		else:
+			coltext.alarm("You don't have anything like that.")
 
 	@staticmethod
 	def make_random_coords():
