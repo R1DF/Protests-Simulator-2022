@@ -69,12 +69,12 @@ class Player:
 		if not self.consumables:
 			print("You don't have any consumables.")
 		else:
-
 			items_and_amounts = {
 				"APPLE": 0,
 				"BREAD": 0,
 				"POTATO": 0,
-				"DICE_OF_FATE": 0
+				"DICE_OF_FATE": 0,
+				"MEDKIT": 0
 			}
 
 			for item in self.consumables:

@@ -37,7 +37,8 @@ class Place:
 				"APPLE": 0,
 				"BREAD": 0,
 				"POTATO": 0,
-				"DICE_OF_FATE": 0
+				"DICE_OF_FATE": 0,
+				"MEDKIT": 0
 			}
 
 			for item in self.contents:

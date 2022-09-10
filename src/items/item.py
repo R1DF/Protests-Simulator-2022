@@ -3,7 +3,8 @@ display_name_to_text = {
     "APPLE": "Apple",
     "BREAD": "Bread",
     "POTATO": "Potato",
-    "DICE_OF_FATE": "Dice of Fate"
+    "DICE_OF_FATE": "Dice of Fate",
+    "MEDKIT": "Medkit"
 }
 
 # Item blueprint
