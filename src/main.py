@@ -28,11 +28,7 @@ This game was based on the January 2022 unrest that occurred in Kazakhstan and h
 """)
 
 # Making the player
-name = ""
-while name.strip() == "":
-    name = request("Enter your name: ")
-    if name.strip() == "":
-        alarm("Please enter something.\n")
+name = force_request("Enter your name: ")
 clear()
 
 # Game loop
