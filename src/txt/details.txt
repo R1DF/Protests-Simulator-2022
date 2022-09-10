@@ -9,8 +9,5 @@ Equipped with R#(EQUIPPED_SWORD)~|.
 Defense: B#(DEF)~|
 Equipped with B#(EQUIPPED_SHIELD)~|.
 
-Inventory contents:
-Y#(INVENTORY_CONTENTS)~|
-Y#(FOOD_CONTENTS)~|
 
-You are currently at the coordinate B#((X), (Y))~| of the map.
+You are currently at the coordinate Y#((X), (Y))~| of the map.
