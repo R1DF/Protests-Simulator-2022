@@ -76,4 +76,7 @@ def force_request(text):
 	query = ""
 	while query == "":
 		query = input(Fore.GREEN + text + Style.RESET_ALL).strip()
+		if query == "":
+			alarm("Enter something.\n")
+
 	return query
