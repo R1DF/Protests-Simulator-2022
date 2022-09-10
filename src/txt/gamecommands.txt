@@ -10,7 +10,7 @@ B#TAKE~| - Take something from the scene.
 B#PUT DOWN~| - Put something you have in your hands back down.
 B#EQUIP~| - Equip an item that you're holding. You can only equip one sword and one shield.
 B#UNEQUIP~| - Unequip a sword or a shield that you're holding.
-B#INV~|/B#INVENTORY~| - Prints out what you're holding at the moment.
+B#INV~|/B#INVENTORY~| - Prints out your inventory and food bag.
 B#STATUS~| - Gives you a summary of your health.
 B#ME~|, B#DETAILS~| - Gives out your full character statistics and details.
 B#SCORE~| - Gives out your score.
