@@ -12,6 +12,9 @@ class Location:
 		self.location_type = location_type
 		self.contents = None
 
+	def is_place(self):
+		return self.contents is not None
+
 	def determine_contents(self, contents_type, coords):
 		if contents_type == "SHOP":
 			self.contents = Shop(coords)
