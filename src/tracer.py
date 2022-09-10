@@ -42,19 +42,33 @@ class CommandTracer:
             self.master.return_map()
 
         elif command == "LOOK":
-            if self.master.field.field[self.master.player.y][self.master.player.x].contents is not None:
+            if self.master.field.field[self.master.player.y][self.master.player.x].is_place():
                 print("You take a look around the place.")
                 self.master.field.field[self.master.player.y][self.master.player.x].contents.show_contents()  # jeez this is big
             else:
                 print("You're located in the streets.")
 
+        elif command == "TAKE":
+            if self.master.field.field[self.master.player.y][self.master.player.x].is_place():
+                self.master.field.field[self.master.player.y][self.master.player.x].contents.show_contents()
+                print("\n")
+                self.master.field.field[self.master.player.y][self.master.player.x].contents.handle_take_query(self.master.player)
+            else:
+                coltext.alarm("There is nothing you can grab on the streets,")
+
+        elif command == "PUT DOWN":
+            if self.master.player.inventory == [] and self.master.player.consumables == []:
+                coltext.alarm("How can you put something down when you're not holding it?")
+            elif not self.master.field.field[self.master.player.y][self.master.player.x].is_place():
+                coltext.alarm("Leaving something in the streets isn't a wise decision.")
+            else:
+                self.master.player.handle_put_down_query(self.master.field.field[self.master.player.y][self.master.player.x].contents)
+
         elif command == "INV" or command == "INVENTORY":
-            if not self.master.player.inventory:  # falsey values??? bruh I thought that was in JS only
+            if self.master.player.inventory == [] and self.master.player.consumables == []:  # falsey values??? bruh I thought that was in JS only
                 print("You're not holding anything.")
             else:
-                print(self.master.player.name + "'s inventory:")
-                for item in self.master.player.inventory:
-                    print(item.display_name)
+                self.master.player.get_holdings()
 
         elif command == "STATUS":
             # Variables to not overuse
