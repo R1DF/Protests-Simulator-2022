@@ -1,5 +1,5 @@
 # Internal import
-from shield import Shield
+from .shield import Shield
 
 # Dagger class
 class RiotShield(Shield):

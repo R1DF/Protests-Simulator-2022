@@ -1,5 +1,5 @@
 # Internal import
-from weapon import Weapon
+from .weapon import Weapon
 
 # Dagger class
 class Dagger(Weapon):

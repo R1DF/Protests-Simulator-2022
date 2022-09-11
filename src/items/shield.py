@@ -1,5 +1,5 @@
 # Internal import
-from item import Item
+from .item import Item
 
 # Weapon blueprint
 class Shield(Item):
