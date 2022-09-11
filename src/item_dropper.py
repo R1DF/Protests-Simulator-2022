@@ -12,37 +12,64 @@ from items.bread import Bread
 from items.potato import Potato
 from items.dice_of_fate import DiceOfFate
 from items.medkit import Medkit
+from items.dagger import Dagger
+from items.bat import WoodenBat
+from items.gun import Gun
+from items.wooden_shield import WoodenShield
+from items.metal_shield import MetalShield
+from items.riot_shield import RiotShield
 
 
 # Item Dropper blueprint
 class ItemDropper:
     def __init__(self, player):
         self.player = player
-        self.items = (
+        self.consumables = (
             ("APPLE", 0),
             ("BREAD", 0),
             ("POTATO", 0),
             ("DICE_OF_FATE", 0),
             ("MEDKIT", 0)
         )
-        self.rng_values = (
-            0,
-            0,
-            0,
-            0,
-            0
+        self.consumables_rng_values = (0, 0, 0, 0, 0)
+
+        self.equipment = (
+            ("DAGGER", 0),
+            ("WOODEN_BAT", 0),
+            ("GUN", 0),
+            ("WOODEN_SHIELD", 0),
+            ("METAL_SHIELD", 0),
+            ("RIOT_SHIELD", 0)
         )
-    def set_items_and_rng(self, items, rng_values):
-        self.items = items
-        self.rng_values = rng_values
+        self.equipment_rng_values = (0, 0, 0, 0, 0, 0)
 
+    def set_consumables_and_rng(self, items, rng_values):
+        self.consumables = (
+            ("APPLE", items[0]),
+            ("BREAD", items[1]),
+            ("POTATO", items[2]),
+            ("DICE_OF_FATE", items[3]),
+            ("MEDKIT", items[4])
+        )  # this part looks stupid so I'd rather get rid of it eventually and make smth better
+        self.consumables_rng_values = rng_values
 
-    def randomize(self, place: Place = None):
+    def set_equipment_and_rng(self, items, rng_values):
+        self.equipment = (
+            ("DAGGER", items[0]),
+            ("WOODEN_BAT", items[1]),
+            ("GUN", items[2]),
+            ("WOODEN_SHIELD", items[3]),
+            ("METAL_SHIELD", items[4]),
+            ("RIOT_SHIELD", items[5])
+        )  # this sucks
+        self.equipment_rng_values = rng_values
+
+    def randomize_consumables(self, place: Place = None):
         # Randomizing
         randomized_contents = []
-        for item, amount in self.items:
+        for item, amount in self.consumables:
             for i in range(amount):
-                throw_limit = self.rng_values[self.items.index((item, amount))]
+                throw_limit = self.consumables_rng_values[self.consumables.index((item, amount))]
                 if random.randint(0, 100) <= throw_limit:
                     randomized_contents.append(item)
 
@@ -59,6 +86,33 @@ class ItemDropper:
                     place.contents.append(DiceOfFate(self.player))
                 case "MEDKIT":
                     place.contents.append(Medkit(self.player))
+                case _:
+                    pass
+
+    def randomize_equipment(self, place: Place = None):
+        # Randomizing
+        randomized_contents = []
+        for item, amount in self.equipment:
+            for i in range(amount):
+                throw_limit = self.equipment_rng_values[self.equipment.index((item, amount))]
+                if random.randint(0, 100) <= throw_limit:
+                    randomized_contents.append(item)
+
+        # Appending the contents
+        for item in randomized_contents:
+            match item:
+                case "DAGGER":
+                    place.contents.append(Dagger(self.player))
+                case "WOODEN_BAT":
+                    place.contents.append(WoodenBat(self.player))
+                case "GUN":
+                    place.contents.append(Gun(self.player))
+                case "WOODEN_SHIELD":
+                    place.contents.append(WoodenShield(self.player))
+                case "METAL_SHIELD":
+                    place.contents.append(MetalShield(self.player))
+                case "RIOT_SHIELD":
+                    place.contents.append(RiotShield(self.player))
                 case _:
                     pass
 
