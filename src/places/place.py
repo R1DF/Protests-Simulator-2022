@@ -38,19 +38,25 @@ class Place:
 				"BREAD": 0,
 				"POTATO": 0,
 				"DICE_OF_FATE": 0,
-				"MEDKIT": 0
+				"MEDKIT": 0,
+				"DAGGER": 0,
+				"WOODEN_BAT": 0,
+				"GUN": 0,
+				"WOODEN_SHIELD": 0,
+				"METAL_SHIELD": 0,
+				"RIOT_SHIELD": 0
 			}
 
 			for item in self.contents:
 				items_and_amounts[item.name] += 1
 
-			print(coltext.colformat(f"Contents of C#{self.name.lower()}~|:"))
+			print(coltext.colformat(f"Contents of C#{self.display_name}~|:"))
 			for item_name in items_and_amounts:
 				if items_and_amounts[item_name] != 0:
 					print(f"{display_name_to_text[item_name]} x{items_and_amounts[item_name]}")
 
 		else:
-			print(coltext.colformat(f"You're in {self.article} C#{self.display_name.lower()}~|, but there's nothing here."))
+			print(coltext.colformat(f"You're in {self.article} C#{self.display_name.lower() if self.name != 'ULKEN_SHARSHY' else 'Ulken Sharshy'}~|, but there's nothing here."))
 
 	def handle_take_query(self, player):
 		item = coltext.force_request("Enter the item you want to take and its amount (default is 1) (e.g. water 2): ").split()
