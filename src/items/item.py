@@ -4,7 +4,13 @@ display_name_to_text = {
     "BREAD": "Bread",
     "POTATO": "Potato",
     "DICE_OF_FATE": "Dice of Fate",
-    "MEDKIT": "Medkit"
+    "MEDKIT": "Medkit",
+    "DAGGER": "Dagger",
+    "WOODEN_BAT": "Wooden Bat",
+    "GUN": "Gun",
+    "WOODEN_SHIELD": "Wooden Shield",
+    "METAL_SHIELD": "Metal Shield",
+    "RIOT_SHIELD": "Riot Shield"
 }
 
 # Item blueprint
