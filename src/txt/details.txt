@@ -4,7 +4,7 @@ Score: B#(SCORE)~|
 Luck: M#(LUCK)~|
 
 Attack: R#(ATK)~|
-Equipped with R#(EQUIPPED_SWORD)~|.
+Equipped with R#(EQUIPPED_WEAPON)~|.
 
 Defense: B#(DEF)~|
 Equipped with B#(EQUIPPED_SHIELD)~|.
