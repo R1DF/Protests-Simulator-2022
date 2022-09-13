@@ -8,6 +8,7 @@ B#N~|/B#NORTH~|, B#E~|/B#EAST~|, B#S~|/B#SOUTH~|, B#W~|/B#WEST~|, B#NE~|/B#NORTH
 B#LOOK~| - Look around and see what the place offers.
 B#TAKE~| - Take something from the scene.
 B#PUT DOWN~| - Put something you have in your hands back down.
+B#USE~| - Use something in your consumables.
 B#EQUIP~| - Equip an item that you're holding. You can only equip one sword and one shield.
 B#UNEQUIP~| - Unequip a sword or a shield that you're holding.
 B#INV~|/B#INVENTORY~| - Prints out your inventory and food bag.
@@ -18,5 +19,5 @@ B#SCORE~| - Gives out your score.
 Combat
 B#ATK~|, B#ATTACK~| - Fight with the weapon you are currently holding. If you don't have one, you'll end up using your fists.
 B#DEF~|, B#DEFEND~| - Defend yourself with a shield. If you don't have one, you'll just wing it.
-B#INV~|, B#INVENTORY~| - Take a look inside what you have.
+B#USE~| - Treat yourself with something  you have while fighting.
 B#FLEE~|, B#RETREAT~| - Bet on your luck and flee.
