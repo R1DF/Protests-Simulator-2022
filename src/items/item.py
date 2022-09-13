@@ -1,3 +1,6 @@
+# Internal import
+from coltext import alarm
+
 # For algorithms
 display_name_to_text = {
     "APPLE": "Apple",
@@ -21,7 +24,13 @@ class Item:
         self.name = name
         self.display_name = display_name
         self.item_type = "consumable"  # original type is always consumable
+        self.description = ""
 
     def use(self):
         pass
 
+    def dispose(self):
+        if self.item_type == "consumable":
+            self.holder.consumables.remove(self)
+        else:
+            alarm("DEBUG: You can't throw away an item. (line 35, items/item.py)")
