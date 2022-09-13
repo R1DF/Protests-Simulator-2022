@@ -1,0 +1,11 @@
+{
+  "readMe": "Don't modify this file! It has valuable information for the game.",
+  "descriptions": {
+    "APPLE": "Restores 7-14 HP, increases ATK by 3-5.",
+    "BREAD": "Restores 10-15 HP, either increases DEF or ATK by 12-15",
+    "POTATO": "Restores 5-15 HP, might increase your ATK by 6.",
+    "DICE_OF_FATE": "Play with fate and see if you get lucky.",
+    "MEDKIT": "Restores 20-45 HP. Can't be used with full health."
+  },
+  "equippable": ["DAGGER", "WOODEN_BAT", "GUN", "WOODEN_SHIELD", "METAL_SHIELD", "RIOT_SHIELD"]
+}
