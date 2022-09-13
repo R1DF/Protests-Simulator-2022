@@ -6,6 +6,7 @@ import coltext
 import random
 from items.item import Item, display_name_to_text
 from items.water_bottle import WaterBottle
+from config_reader import config_data
 
 # Place blueprint
 class Place:
@@ -71,6 +72,11 @@ class Place:
 			amount = 1
 			item_name = " ".join(item)
 
+			# Checking if item tries to be equippable but duplicate
+		if item in [x.lower().replace("_", " ") for x in config_data["equippable"]]:
+			coltext.alarm("You can only take swords and shields one at a time.")
+			return
+
 		# Checking if item exists
 		if item_name.lower() in contents_names:
 			if contents_names.count(item_name.lower()) >= amount:
@@ -79,12 +85,16 @@ class Place:
 					exact_item = self.contents[contents_names.index(item_name)]
 					if exact_item.item_type == "consumable":  # checking if consumable
 						player.consumables.append(exact_item)
+						self.contents.remove(exact_item)
 					else:
-						player.inventory.append(exact_item)  # otherwise
-					self.contents.remove(exact_item)
+						if len(player.inventory) < 2:
+							player.inventory.append(exact_item)  # otherwise
+							self.contents.remove(exact_item)
 
-				# Notifying
-				print("Taken. Your inventory has been updated.")
+							# Notifying
+							print("Taken. Your inventory has been updated.")
+						else:
+							coltext.alarm("You can only hold 2 equippable items. Life is unfair.")
 			else:
 				coltext.alarm("That's way too much...")
 		else:
