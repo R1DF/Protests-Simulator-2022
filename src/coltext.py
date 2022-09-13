@@ -41,7 +41,12 @@ def detformat(file_data, player):
 		"(X)", str(player.x + 1)
 	).replace(
 		"(Y)", str(player.y + 1)
+	).replace(
+		"(EQUIPPED_WEAPON)", player.equipped_weapon.display_name if player.equipped_weapon is not None else "nothing"
+	).replace(
+		"(EQUIPPED_SHIELD)", player.equipped_shield.display_name if player.equipped_shield is not None else "nothing"
 	)
+
 
 def colformat_map(map):
 	return map.replace(
