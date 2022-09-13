@@ -69,3 +69,5 @@ ULK - The Ulken Sharshy"""))
 			print(f"You are in {player_location.contents.article} {player_location.contents.display_name.lower() if player_location.contents.display_name != 'Ulken Sharshy' else player_location.contents.display_name}.")
 		else:
 			print("You're outside.")
+
+
