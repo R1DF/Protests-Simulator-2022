@@ -1,9 +1,12 @@
-# Imports for coords randomization
+# Package import
 import json
 import os
 import random
+
+# Internal imiport
 import coltext
 from items.item import display_name_to_text
+from config_reader import config_data
 
 # Player class
 class Player:
@@ -12,6 +15,7 @@ class Player:
 		self.name = name
 		self.x, self.y = coordinates  # The player starts at a randomized location but that's not done here
 		self.attack, self.defense = 7, 7  # nasty def keyword forbids me from contracting the names
+		self.equipped_weapon, self.equipped_shield = None, None
 		self.health = 100
 		self.luck = 80  # will make your life ten times harder when you're about to die
 		self.inventory = []  # can only hold 2 things at a time
@@ -62,7 +66,7 @@ class Player:
 			print("There is nothing in your inventory.")
 		else:
 			for item in self.inventory:
-				print(f"{item.name}f{' (equipped)' if item.equipped else ''}")  # status -> (equipped, not)
+				print(f"{item.display_name}{' (equipped)' if item.equipped else ''}")  # status -> (equipped, not)
 
 		# Consumables
 		print(coltext.colformat("\nC#Consumables:~|"))
@@ -74,7 +78,7 @@ class Player:
 				"BREAD": 0,
 				"POTATO": 0,
 				"DICE_OF_FATE": 0,
-				"MEDKIT": 0
+				"MEDKIT": 0,
 			}
 
 			for item in self.consumables:
@@ -113,10 +117,14 @@ class Player:
 						self.consumables.remove(exact_item)
 
 				else:
-					for item_object in range(amount):
-						exact_item = self.inventory[inventory_names.index(item_name)]
-						place.contents.append(exact_item)
-						self.consumables.remove(exact_item)
+					exact_item = self.inventory[inventory_names.index(item_name)]
+					if exact_item.equipped:
+						coltext.alarm("Unequip it first.")
+						return
+
+					place.contents.append(exact_item)
+					self.inventory.remove(exact_item)
+
 
 				# Notifying
 				print(f"You left the item{'s' if amount>1 else ''}. Your inventory has been updated.")
@@ -124,6 +132,71 @@ class Player:
 				coltext.alarm("Bold of you to assume you have that many.")
 		else:
 			coltext.alarm("You don't have anything like that.")
+
+	def handle_equip_query(self):
+		if not self.inventory:
+			coltext.alarm("There's nothing you can equip. Search more and you'll find some...")
+		else:
+			inventory_names = [x.display_name.upper() for x in self.inventory]
+			print(coltext.colformat("Your C#inventory~|:"))
+			for item in self.inventory:
+				print(f"{item.display_name}{'(already equipped)' if item.equipped else ''}")
+
+			query = coltext.force_request("\nEnter the name of the object you'd like to equip (e.g. \"dagger\"): ").upper()
+			item = self.inventory[inventory_names.index(query)]
+
+			if item.equipped:
+				coltext.alarm("You already equipped it, don't worry.\n")
+			else:
+				item.equip()
+				print("Equipped. You feel stronger now.\n")
+
+	def handle_unequip_query(self):
+		if not self.inventory:
+			coltext.alarm("You don't have anything to unequip. Chill.")
+		else:
+			inventory_names = [x.display_name.upper() for x in self.inventory]
+			print(coltext.colformat("Your C#inventory~|:"))
+			for item in self.inventory:
+				print(f"{item.display_name}{' (already equipped)' if item.equipped else ''}")
+
+			query = coltext.force_request("\nEnter the name of the object you'd like to unequip (e.g. \"wooden shield\"): ").upper()
+			item = self.inventory[inventory_names.index(query)]
+
+			if not item.equipped:
+				coltext.alarm("It wasn't equipped in the first place.\n")
+			else:
+				item.unequip()
+				print("Unequipped. Whether this was a good idea or not, only you can decide.\n")
+
+	def handle_use_query(self):
+		consumables_names = [x.name for x in self.consumables]
+		if self.consumables:
+			print(coltext.colformat("Your C#consumables~|:"))
+
+			items_and_amounts = {
+				"APPLE": 0,
+				"BREAD": 0,
+				"POTATO": 0,
+				"DICE_OF_FATE": 0,
+				"MEDKIT": 0,
+			}
+
+			for item in self.consumables:
+				items_and_amounts[item.name] += 1
+
+			for item in items_and_amounts:
+				if items_and_amounts[item] != 0:
+					print(f"{display_name_to_text[item]} x{items_and_amounts[item]}\n{config_data['descriptions'][item]}\n")
+
+			item = coltext.force_request("\nEnter the item you'd like to use (e.g. \"medkit\"): ").strip().upper().replace(" ", "_")
+			if item in items_and_amounts:
+				exact_item = self.consumables[consumables_names.index(item)]
+				exact_item.use()
+			else:
+				coltext.alarm("You don't have that.")
+		else:
+			coltext.alarm("You have nothing to use.")
 
 	@staticmethod
 	def make_random_coords():
