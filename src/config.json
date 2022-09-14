@@ -7,5 +7,21 @@
     "DICE_OF_FATE": "Play with fate and see if you get lucky.",
     "MEDKIT": "Restores 20-45 HP. Can't be used with full health."
   },
+  "enemyData": {
+    "names": ["Protestor", "Rioter", "Gangster"],
+    "attackNotices": {
+      "DAGGER": ["The (ENEMY) scratches you with their dagger.", "The (ENEMY) hits you with the back of the dagger. What a fool."],
+      "WOODEN_BAT": ["The (ENEMY) clubs your shoulder with a bat.", "The (ENEMY) hits you with their wooden bat. Ouch."]
+    },
+    "critAttackNotices": {
+      "DAGGER": ["The (ENEMY) stabs your arm! Don't worry though, you have plot armour.", "What a critical move! The (ENEMY) stabs you, but you don't bleed easily."],
+      "WOODEN_BAT": ["Yikes... You get whacked in the head by a bat so hard your head spins for a bit...", "You feel a hit to the stomach as the (ENEMY) attacks you."]
+    },
+    "missNotices": {
+      "DAGGER": "The (ENEMY) tries to stab you but he misses. What an idiot!",
+      "WOODEN_BAT": "The (ENEMY) swings so hard that he forgets he must aim first. Lucky you."
+    },
+    "defenseNotice": "The (ENEMY) takes their defending pose..."
+  },
   "equippable": ["DAGGER", "WOODEN_BAT", "GUN", "WOODEN_SHIELD", "METAL_SHIELD", "RIOT_SHIELD"]
 }
