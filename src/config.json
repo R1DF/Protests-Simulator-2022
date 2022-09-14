@@ -21,7 +21,28 @@
       "DAGGER": "The (ENEMY) tries to stab you but he misses. What an idiot!",
       "WOODEN_BAT": "The (ENEMY) swings so hard that he forgets he must aim first. Lucky you."
     },
-    "defenseNotice": "The (ENEMY) takes their defending pose..."
+    "defenseNotice": "The (ENEMY) takes their defending pose...",
+    "failureNotices": "The (ENEMY) tried to hit you, but your defense was too strong!"
+  },
+  "playerData": {
+    "attackNotices": {
+      "DAGGER": ["You use your dagger and stab the enemy.", "You reach for the enemy's shoulder with your dagger."],
+      "WOODEN_BAT": ["One. Two. Three! You hit the (ENEMY) with the bat!", "You remember what your dad taught you and use the bat. What a sportsman."],
+      "GUN": ["You embrace your inner American and pull the trigger.", "Pew! The (ENEMY) feels a bullet puncture them."]
+    },
+    "critAttackNotices": {
+      "DAGGER": ["You stab the (ENEMY) and struggle getting the knife out, hurting them even more. Interesting...", "You stab the enemy wih mastery. Even they are impressed!"],
+      "WOODEN_BAT": ["You hit so strongly the (ENEMY) nearly loses their balance! What a home run!", "You use your bat 'for a while' so hard the (ENEMY) flinches. I'm sure the police would be impressed."],
+      "GUN": ["Fire! You shoot the (ENEMY) so badly they scream.", "The bullet doesn't reach the vitals but you can see how much pain the (ENEMY) felt. Yeowch..."]
+    },
+    "missNotices": {
+      "DAGGER": ["You suddenly get nervous and miss. Idiot!", "You attempt to strike the (ENEMY) but they dodge you!."],
+      "WOODEN_BAT": ["You swing as hard as possible, but the (ENEMY) blocks your bat!", "You spend too much time thinking about how to hit so hard with the bat you don't notice the (ENEMY) approaching.."],
+      "GUN": ["Your gun jams as you try to shoot. Uh oh!", "You feel like James Bond but forget that you need to aim. You shoot, hitting the floor.."]
+    },
+    "defenseNotice": "You decide to defend yourself. Luck and defense temporarily increases.",
+    "failureNotices": "You tried to hit the (ENEMY) but their defense was too strong!"
+
   },
   "equippable": ["DAGGER", "WOODEN_BAT", "GUN", "WOODEN_SHIELD", "METAL_SHIELD", "RIOT_SHIELD"]
 }
