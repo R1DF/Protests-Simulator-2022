@@ -10,4 +10,4 @@ Defense: B#(DEF)~|
 Equipped with B#(EQUIPPED_SHIELD)~|.
 
 
-You are currently at the coordinate Y#((X), (Y))~| of the map.
+Location: Y#((X), (Y))~| on the map.
