@@ -1,0 +1,8 @@
+M#You are currently in a fight!~|
+B#HELP~| - Find out what commands you can do whilst fighting.
+B#ATK~|, B#ATTACK~| - Fight with the weapon you are currently holding. If you don't have one, you'll end up using your fists.
+B#DEF~|, B#DEFEND~| - Defend yourself with a shield. If you don't have one, you'll just wing it.
+B#USE~| - Treat yourself with something  you have while fighting.
+B#FLEE~|, B#RETREAT~| - Bet on your luck and flee.
+
+End the fight victoriously and you will be free to continue exploring again.
