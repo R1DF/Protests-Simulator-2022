@@ -5,5 +5,5 @@ from .shield import Shield
 class RiotShield(Shield):
     def __init__(self, holder):
         # Initialization
-        Shield.__init__(self, holder, "RIOT_SHIELD", "Riot  Shield", 11)
+        Shield.__init__(self, holder, "RIOT_SHIELD", "Riot Shield", 11)
 
