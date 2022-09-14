@@ -21,6 +21,10 @@ class Player:
 		self.inventory = []  # can only hold 2 things at a time
 		self.consumables = []  # extra space, only for food and other stuff
 		self.score = 0
+		self.moves = 0
+
+	def get_moves(self):
+		print(f"Moves: {self.moves}")
 
 	def get_status(self):
 		if self.health >= 75:
@@ -58,6 +62,7 @@ class Player:
 					self.y -= 1
 				case "s":
 					self.y += 1
+		self.moves += 1
 
 	def get_holdings(self):
 		# Weapons and shields
