@@ -1,7 +1,12 @@
-# Imports
+# Package imports
+from random import randint
+
+# Internal imports
 import coltext
 from field import Field
 from player import Player
+from enemy import Enemy
+from fight import Fight
 from tracer import CommandTracer
 
 # Game code
@@ -11,26 +16,30 @@ class Game:
 		self.player = Player(player_name[0].upper() + player_name[1:], Player.make_random_coords())
 		self.field = Field(self.player)
 		self.command_tracer = CommandTracer(self)
+		self.has_quit = False
+		self.fight = None
 
 		# Giving help note
-		coltext.announce("Enter \"HELP\" to get information on the game commands.\n\n")
+		print(coltext.colformat("Enter \"B#HELP~|\" to get information on the game commands.\n\n"))
 
 		# Game loop
 		self.game_loop()
 
 		# Checking how the game went
 		coltext.clear()
-		if self.player.get_status() != "dead":
+		if self.player.get_status() != "dead" and (not self.has_quit):
 			coltext.colformat("M#Congratulations!~|")
-			print("You successfully found a water bottle and took it with you alive.")
+			print("You successfully found a water bottle and took it with you alive.\n")
 
-			print("Final statistics:")
-			self.command_tracer.trace("me")
-			print("Well played.\n\n")
+		elif self.has_quit:
+			print("You gave up.\n")
 
 		else:
 			coltext.alarm("Game over!")
-			print(f"You are dead.\nCause of death: {self.player.get_cause_of_death()}\nBetter luck next time!\n\n")
+			print(f"You are dead.\nCause of death: {self.player.get_cause_of_death()}\nBetter luck next time!\n")
+
+		self.command_tracer.trace("ME")
+		print("\nGood game. Press Enter to exit.\n")
 
 		# Game ending code
 		input()
@@ -39,10 +48,27 @@ class Game:
 
 
 	def game_loop(self):
-		while (self.player.get_status() != "dead") and ([self.player.x, self.player.y] != self.field.parking_spot_coords): # lose and win condition
+		while (self.player.get_status() != "dead") and ([self.player.x, self.player.y] != self.field.parking_spot_coords) and (not self.has_quit): # lose and win condition
 			command = coltext.request("Enter command: ").strip().upper()
 			self.command_tracer.trace(command)
+
+			if self.player.moves >= 10 and self.command_tracer.last_command == "MOVE":
+				self.attempt_fight()
+
 			print("\n")  # line breaker
+
+	def attempt_fight(self):
+		# Getting luck and bumping it up if there's a street
+		luck = -15 #self.player.luck
+		print(luck)
+		if not self.field.field[self.player.y][self.player.x].is_place():
+			luck += 15
+
+		# RNG
+		if randint(1, 100) > luck:
+			self.fight = Fight(self.player, Enemy(self.player))
+
+
 
 	def return_map(self):
 		# Formatting map and styling it
