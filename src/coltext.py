@@ -85,3 +85,6 @@ def force_request(text):
 			alarm("Enter something.\n")
 
 	return query
+
+def confirm():
+	return request("Are you sure? (Y/N): ").strip().upper() == "Y"
