@@ -7,7 +7,7 @@ import random
 import coltext
 from items.item import display_name_to_text
 from config_reader import config_data
-
+from enemy import Enemy
 # Player class
 class Player:
 	def __init__(self, name, coordinates):
@@ -22,6 +22,36 @@ class Player:
 		self.consumables = []  # extra space, only for food and other stuff
 		self.score = 0
 		self.moves = 0
+		self.is_defending = False
+
+	def attack_enemy(self, enemy: Enemy):
+		if random.randint(1, 100) < self.luck and random.randint(1, 10) < 2:
+			return "miss"
+		else:
+			if enemy.defense >= self.attack:
+				return "invulnerable"
+
+			if random.randint(1, 100) < self.luck:
+				damage_dealt = self.attack - enemy.defense
+				did_crit = False
+			else:
+				damage_dealt = self.attack - enemy.defense + random.randint(5, 15)  # adding crit
+				did_crit = True
+
+			enemy.health -= damage_dealt
+			return "crit" if did_crit else "success"
+
+	def defend(self):
+		if not self.is_defending:
+			self.luck += 10
+			self.defense += 4
+			self.is_defending = True
+
+	def stop_defense(self):
+		if self.is_defending:
+			self.luck -= 10
+			self.defense -= 4
+			self.is_defending = False
 
 	def get_moves(self):
 		print(f"Moves: {self.moves}")
@@ -64,8 +94,7 @@ class Player:
 					self.y += 1
 		self.moves += 1
 
-	def get_holdings(self):
-		# Weapons and shields
+	def get_inventory(self):
 		print(coltext.colformat("C#Inventory:~|"))
 		if not self.inventory:
 			print("There is nothing in your inventory.")
@@ -73,7 +102,7 @@ class Player:
 			for item in self.inventory:
 				print(f"{item.display_name}{' (equipped)' if item.equipped else ''}")  # status -> (equipped, not)
 
-		# Consumables
+	def get_consumables(self):
 		print(coltext.colformat("\nC#Consumables:~|"))
 		if not self.consumables:
 			print("You don't have any consumables.")
@@ -92,6 +121,10 @@ class Player:
 			for item in items_and_amounts:
 				if items_and_amounts[item] != 0:
 					print(f"{display_name_to_text[item]} x{items_and_amounts[item]}")
+
+	def get_holdings(self):
+		self.get_inventory()
+		self.get_consumables()
 
 	def handle_put_down_query(self, place):
 		# Showing what the person already has
@@ -143,12 +176,15 @@ class Player:
 			coltext.alarm("There's nothing you can equip. Search more and you'll find some...")
 		else:
 			inventory_names = [x.display_name.upper() for x in self.inventory]
-			print(coltext.colformat("Your C#inventory~|:"))
-			for item in self.inventory:
-				print(f"{item.display_name}{'(already equipped)' if item.equipped else ''}")
+			self.get_inventory()
 
 			query = coltext.force_request("\nEnter the name of the object you'd like to equip (e.g. \"dagger\"): ").upper()
-			item = self.inventory[inventory_names.index(query)]
+			try:
+				item = self.inventory[inventory_names.index(query)]
+
+			except ValueError:
+				coltext.alarm("I don't know about such a thing.")
+				return
 
 			if item.equipped:
 				coltext.alarm("You already equipped it, don't worry.\n")
@@ -166,7 +202,11 @@ class Player:
 				print(f"{item.display_name}{' (already equipped)' if item.equipped else ''}")
 
 			query = coltext.force_request("\nEnter the name of the object you'd like to unequip (e.g. \"wooden shield\"): ").upper()
-			item = self.inventory[inventory_names.index(query)]
+			try:
+				item = self.inventory[inventory_names.index(query)]
+			except ValueError:
+				coltext.alarm("I don't know about such thing.")
+				return
 
 			if not item.equipped:
 				coltext.alarm("It wasn't equipped in the first place.\n")
