@@ -60,7 +60,6 @@ class Game:
 	def attempt_fight(self):
 		# Getting luck and bumping it up if there's a street
 		luck = -15 #self.player.luck
-		print(luck)
 		if not self.field.field[self.player.y][self.player.x].is_place():
 			luck += 15
 
