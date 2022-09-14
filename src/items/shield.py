@@ -13,7 +13,7 @@ class Shield(Item):
         self.equipped = False
 
     def equip(self):
-        self.holder.shield = self
+        self.holder.equipped_shield = self
         self.holder.defense += self.def_bonus
         self.equipped = True
 
