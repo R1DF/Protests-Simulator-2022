@@ -72,7 +72,7 @@ class Place:
 			amount = 1
 			item_name = " ".join(item)
 
-			# Checking if item tries to be equippable but duplicate
+		# Checking if item tries to be equippable but duplicate
 		if item in [x.lower().replace("_", " ") for x in config_data["equippable"]]:
 			coltext.alarm("You can only take swords and shields one at a time.")
 			return
@@ -86,6 +86,7 @@ class Place:
 					if exact_item.item_type == "consumable":  # checking if consumable
 						player.consumables.append(exact_item)
 						self.contents.remove(exact_item)
+						print("Taken. You now have more consumables.")
 					else:
 						if len(player.inventory) < 2:
 							player.inventory.append(exact_item)  # otherwise
