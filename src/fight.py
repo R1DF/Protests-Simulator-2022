@@ -20,12 +20,14 @@ class Fight:
         self.enemy = enemy
         self.enemy_name = self.enemy.name
         self.escaped = False
+        self.player_weapon, self.enemy_weapon = None, None
         self.escapable = random.randint(1, 100) <= self.player.luck
         self.commands = ["HELP", "ATK", "ATTACK", "DEF", "DEFEND", "INV", "INVENTORY", "FLEE", "RETREAT"]
 
         # Notifying
         print(f"You're in a fight with a {self.enemy_name.lower()}! Oh no!\n")
         self.notify()
+        self.get_weapons()
 
         # Fight loop
         self.fight_loop()
@@ -33,6 +35,17 @@ class Fight:
             print("Your enemy puts their hands up in surrender. You get away from the scene.\nThe fight is over.")
         else:
             print("The fight is over.")
+
+    def get_weapons(self):
+        if self.player.equipped_weapon is None:
+            self.player_weapon = "NONE"
+        else:
+            self.player_weapon = self.player.equipped_weapon.name
+
+        if self.enemy.equipped_weapon is None:
+            self.enemy_weapon = "NONE"
+        else:
+            self.enemy_weapon = self.enemy.equipped_weapon.name
 
     def fight_loop(self):
         while self.player.health > 0:
@@ -70,15 +83,15 @@ class Fight:
                 attempt = self.player.attack_enemy(self.enemy)
                 match attempt:
                     case "crit":
-                        print(random.choice(config_data["playerData"]["critAttackNotices"][self.player.equipped_weapon.name]).replace(
+                        print(random.choice(config_data["playerData"]["critAttackNotices"][self.player_weapon]).replace(
                             "(ENEMY)", self.enemy_name))
 
                     case "success":
-                        print(random.choice(config_data["playerData"]["attackNotices"][self.player.equipped_weapon.name]).replace(
+                        print(random.choice(config_data["playerData"]["attackNotices"][self.player_weapon]).replace(
                             "(ENEMY)", self.enemy_name))
 
                     case "miss":
-                        print(random.choice(config_data["playerData"]["missNotices"][self.player.equipped_weapon.name]).replace("(ENEMY)", self.enemy_name))
+                        print(random.choice(config_data["playerData"]["missNotices"][self.player_weapon]).replace("(ENEMY)", self.enemy_name))
 
                     case "invulnerable":
                         print(config_data["playerData"]["failureNotices"].replace("(ENEMY)", self.enemy_name))
@@ -105,13 +118,13 @@ class Fight:
         attempt = self.enemy.attack_player()
         match attempt:
             case "crit":
-                print(random.choice(config_data["enemyData"]["critAttackNotices"][self.enemy.equipped_weapon.name]).replace("(ENEMY)", self.enemy_name))
+                print(random.choice(config_data["enemyData"]["critAttackNotices"][self.enemy_weapon]).replace("(ENEMY)", self.enemy_name))
 
             case "success":
-                print(random.choice(config_data["enemyData"]["attackNotices"][self.enemy.equipped_weapon.name]).replace("(ENEMY)", self.enemy_name))
+                print(random.choice(config_data["enemyData"]["attackNotices"][self.enemy_weapon]).replace("(ENEMY)", self.enemy_name))
 
             case "miss":
-                print(random.choice(config_data["enemyData"]["missNotices"][self.enemy.equipped_weapon.name]).replace("(ENEMY)", self.enemy_name))
+                print(config_data["enemyData"]["missNotices"][self.enemy_weapon].replace("(ENEMY)", self.enemy_name))
 
             case "invulnerable":
                 print(config_data["enemyData"]["failureNotices"].replace("(ENEMY)", self.enemy_name))
