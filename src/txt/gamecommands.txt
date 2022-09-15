@@ -15,6 +15,7 @@ B#INV~|/B#INVENTORY~| - Prints out your inventory and food bag.
 B#STATUS~| - Gives you a summary of your health.
 B#ME~|, B#DETAILS~| - Gives out your full character statistics and details.
 B#SCORE~| - Gives out your score.
+B#MOVES~| - Shows how many moves you have made.
 
 Combat
 B#ATK~|, B#ATTACK~| - Fight with the weapon you are currently holding. If you don't have one, you'll end up using your fists.
