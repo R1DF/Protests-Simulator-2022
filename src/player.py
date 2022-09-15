@@ -3,11 +3,12 @@ import json
 import os
 import random
 
-# Internal imiport
+# Internal import
 import coltext
 from items.item import display_name_to_text
 from config_reader import config_data
 from enemy import Enemy
+
 # Player class
 class Player:
 	def __init__(self, name, coordinates):
@@ -17,12 +18,13 @@ class Player:
 		self.attack, self.defense = 7, 7  # nasty def keyword forbids me from contracting the names
 		self.equipped_weapon, self.equipped_shield = None, None
 		self.health = 100
-		self.luck = 80  # will make your life ten times harder when you're about to die
+		self.luck = random.randint(60, 80)
 		self.inventory = []  # can only hold 2 things at a time
 		self.consumables = []  # extra space, only for food and other stuff
 		self.score = 0
 		self.moves = 0
 		self.is_defending = False
+		self.weapon_killed_with = "" # not None
 
 	def attack_enemy(self, enemy: Enemy):
 		if random.randint(1, 100) < self.luck and random.randint(1, 10) < 2:
@@ -113,6 +115,7 @@ class Player:
 				"POTATO": 0,
 				"DICE_OF_FATE": 0,
 				"MEDKIT": 0,
+				"WATER_BOTTLE": 0
 			}
 
 			for item in self.consumables:
@@ -131,7 +134,7 @@ class Player:
 		self.get_holdings()
 
 		# Handling query
-		item = coltext.force_request("\nEnter the item you want to leave and its amount (default is 1) (e.g. water 2): ").split()
+		item = coltext.force_request("\nEnter the item you want to leave and its amount (default is 1) (e.g. apple 2): ").split()
 		inventory_names = [x.display_name.lower() for x in self.inventory]
 		consumables_names = [x.display_name.lower() for x in self.consumables]
 		holdings = inventory_names + consumables_names
@@ -242,6 +245,28 @@ class Player:
 				coltext.alarm("You don't have that.")
 		else:
 			coltext.alarm("You have nothing to use.")
+
+	def has_bottle(self):
+		contents = [x.name for x in self.consumables]
+		if "WATER_BOTTLE" in contents:
+			return True
+		return False
+
+	def get_cause_of_death(self):
+		try:
+			self.weapon_killed_with = self.weapon_killed_with.name
+		except AttributeError:
+			self.weapon_killed_with = None
+
+		match self.weapon_killed_with:
+			case "DAGGER":
+				return "Stabbed with a dagger."
+			case "WOODEN_BAT":
+				return "Clubbed with a bat."
+			case "GUN":
+				return "Shot with a gun."
+			case None:
+				return "KO'd to death."
 
 	@staticmethod
 	def make_random_coords():
