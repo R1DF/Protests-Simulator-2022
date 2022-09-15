@@ -51,6 +51,8 @@ class Enemy:
                 damage_dealt = self.attack - self.player.defense + random.randint(5, 15) # adding crit
                 did_crit = True
 
+            if damage_dealt >= self.player.health:
+                self.player.weapon_killed_with = self.equipped_weapon
             self.player.health -= damage_dealt
             return "crit" if did_crit else "success"
 
