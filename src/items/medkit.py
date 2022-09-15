@@ -11,7 +11,7 @@ class Medkit(Item):
         Item.__init__(self, holder, "MEDKIT", "Medkit")
 
     def use(self):
-        if self.holder.health == 100:
+        if self.holder.health >= 100:
             print("You put the medkit away because you realize you don't need it yet.")
             return
 
