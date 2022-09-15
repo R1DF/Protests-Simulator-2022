@@ -19,11 +19,14 @@ class Field:
 		self.parking_spot_coords = None  # necessary for game to end
 		self.player = player  # for ItemDropper
 		self.item_dropper = ItemDropper(self.player)
+		self.places_of_interest = choice(("HOUSE", "SHOP", "OFFICE"))
+		self.key_place = None
 
 		# Making field
 		self.make_field()
 		self.make_item_distributions()
 		self.generate_places()
+		self.place_bottle()
 
 	def make_field(self):
 		for column in range(self.extent_y):
@@ -81,4 +84,15 @@ class Field:
 		for coords in coords_data["ulken_sharshy"]:
 			self.field[coords[1]][coords[0]].determine_contents("ULKEN_SHARSHY", coords)
 			self.item_dropper.randomize_equipment(self.field[coords[1]][coords[0]].contents)
+
+	def place_bottle(self):
+		places = []
+		for y in self.field:
+			for x in y: # this code sucks
+				if x.is_place():
+					if x.contents.name == self.places_of_interest:
+						places.append(x.contents)
+		self.key_place = choice(places)
+		self.key_place.make_decisive(self.player)
+		print(self.key_place.location_x, self.key_place.location_y)
 
