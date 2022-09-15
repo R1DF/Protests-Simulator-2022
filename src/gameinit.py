@@ -48,10 +48,12 @@ class Game:
 
 
 	def game_loop(self):
-		while (self.player.get_status() != "dead") and (([self.player.x, self.player.y] != self.field.parking_spot_coords) and self.player.has_bottle()) and (not self.has_quit): # lose and win condition
+		win_condition = [self.player.x, self.player.y] == self.field.parking_spot_coords and self.player.has_bottle()
+		while (self.player.get_status() != "dead") and (not win_condition) and (not self.has_quit): # lose and win condition
 			command = coltext.request("Enter command: ").strip().upper()
 			self.command_tracer.trace(command)
-
+			win_condition = [self.player.x,
+							 self.player.y] == self.field.parking_spot_coords and self.player.has_bottle()
 			if self.player.moves >= 10 and self.command_tracer.last_command == "MOVE":
 				self.attempt_fight()
 
@@ -59,7 +61,7 @@ class Game:
 
 	def attempt_fight(self):
 		# Getting luck and bumping it up if there's a street
-		luck = 100 #self.player.luck
+		luck = self.player.luck
 		if not self.field.field[self.player.y][self.player.x].is_place():
 			luck += 15
 

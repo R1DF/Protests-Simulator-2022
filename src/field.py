@@ -94,4 +94,5 @@ class Field:
 						places.append(x.contents)
 		self.key_place = choice(places)
 		self.key_place.make_decisive(self.player)
+		#print(self.key_place.location_x, self.key_place.location_y) # uncomment for debug
 

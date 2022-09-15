@@ -228,6 +228,7 @@ class Player:
 				"POTATO": 0,
 				"DICE_OF_FATE": 0,
 				"MEDKIT": 0,
+				"WATER_BOTTLE": 0
 			}
 
 			for item in self.consumables:
