@@ -5,21 +5,25 @@
     "BREAD": "Restores 10-15 HP, either increases DEF or ATK by 12-15",
     "POTATO": "Restores 5-15 HP, might increase your ATK by 6.",
     "DICE_OF_FATE": "Play with fate and see if you get lucky.",
-    "MEDKIT": "Restores 20-45 HP. Can't be used with full health."
+    "MEDKIT": "Restores 20-45 HP. Can't be used with full health.",
+    "WATER_BOTTLE": "Sets HP to 100."
   },
   "enemyData": {
     "names": ["Protestor", "Rioter", "Gangster"],
     "attackNotices": {
       "DAGGER": ["The (ENEMY) scratches you with their dagger.", "The (ENEMY) hits you with the back of the dagger. What a fool."],
-      "WOODEN_BAT": ["The (ENEMY) clubs your shoulder with a bat.", "The (ENEMY) hits you with their wooden bat. Ouch."]
+      "WOODEN_BAT": ["The (ENEMY) clubs your shoulder with a bat.", "The (ENEMY) hits you with their wooden bat. Ouch."],
+      "NONE": ["The (ENEMY) punches you with their fist.", "The (ENEMY) uses their hand to deliver you a hit."]
     },
     "critAttackNotices": {
       "DAGGER": ["The (ENEMY) stabs your arm! Don't worry though, you have plot armour.", "What a critical move! The (ENEMY) stabs you, but you don't bleed easily."],
-      "WOODEN_BAT": ["Yikes... You get whacked in the head by a bat so hard your head spins for a bit...", "You feel a hit to the stomach as the (ENEMY) attacks you."]
+      "WOODEN_BAT": ["Yikes... You get whacked in the head by a bat so hard your head spins for a bit...", "You feel a hit to the stomach as the (ENEMY) attacks you."],
+      "NONE": ["The player hits the area under your pants. It doesn't hurt that badly, at least..", "Pow! Your jaw takes a huge blow as tbe (ENEMY) hits."]
     },
     "missNotices": {
       "DAGGER": "The (ENEMY) tries to stab you but he misses. What an idiot!",
-      "WOODEN_BAT": "The (ENEMY) swings so hard that he forgets he must aim first. Lucky you."
+      "WOODEN_BAT": "The (ENEMY) swings so hard that he forgets he must aim first. Lucky you.",
+      "NONE": "The (ENEMY) takes too much time looking cool and not enough to aim with their fist."
     },
     "defenseNotice": "The (ENEMY) takes their defending pose...",
     "failureNotices": "The (ENEMY) tried to hit you, but your defense was too strong!"
@@ -28,17 +32,20 @@
     "attackNotices": {
       "DAGGER": ["You use your dagger and stab the enemy.", "You reach for the enemy's shoulder with your dagger."],
       "WOODEN_BAT": ["One. Two. Three! You hit the (ENEMY) with the bat!", "You remember what your dad taught you and use the bat. What a sportsman."],
-      "GUN": ["You embrace your inner American and pull the trigger.", "Pew! The (ENEMY) feels a bullet puncture them."]
+      "GUN": ["You embrace your inner American and pull the trigger.", "Pew! The (ENEMY) feels a bullet puncture them."],
+      "NONE": ["You attack the (ENEMY) with your fists.", "You lunge for the (ENEMY)'s stomach and punch."]
     },
     "critAttackNotices": {
       "DAGGER": ["You stab the (ENEMY) and struggle getting the knife out, hurting them even more. Interesting...", "You stab the enemy wih mastery. Even they are impressed!"],
       "WOODEN_BAT": ["You hit so strongly the (ENEMY) nearly loses their balance! What a home run!", "You use your bat 'for a while' so hard the (ENEMY) flinches. I'm sure the police would be impressed."],
-      "GUN": ["Fire! You shoot the (ENEMY) so badly they scream.", "The bullet doesn't reach the vitals but you can see how much pain the (ENEMY) felt. Yeowch..."]
+      "GUN": ["Fire! You shoot the (ENEMY) so badly they scream.", "The bullet doesn't reach the vitals but you can see how much pain the (ENEMY) felt. Yeowch..."],
+      "NONE": ["Falcon Punch! You hit the (ENEMY) so hard they nearly fall back!", "You miscalculate your anger so badly and... give the (ENEMY) a bruise!? Way to go!"]
     },
     "missNotices": {
       "DAGGER": ["You suddenly get nervous and miss. Idiot!", "You attempt to strike the (ENEMY) but they dodge you!."],
       "WOODEN_BAT": ["You swing as hard as possible, but the (ENEMY) blocks your bat!", "You spend too much time thinking about how to hit so hard with the bat you don't notice the (ENEMY) approaching.."],
-      "GUN": ["Your gun jams as you try to shoot. Uh oh!", "You feel like James Bond but forget that you need to aim. You shoot, hitting the floor.."]
+      "GUN": ["Your gun jams as you try to shoot. Uh oh!", "You feel like James Bond but forget that you need to aim. You shoot, hitting the floor.."],
+      "NONE": ["You realize that you look like a clown while trying to punch and do nothing out of embarrassment.", "You position yourself on the ground but can't position your hands. What an idiot."]
     },
     "defenseNotice": "You decide to defend yourself. Luck and defense temporarily increases.",
     "failureNotices": "You tried to hit the (ENEMY) but their defense was too strong!"
