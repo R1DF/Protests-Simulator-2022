@@ -10,6 +10,7 @@ display_name_to_text = {
     "MEDKIT": "Medkit",
     "DAGGER": "Dagger",
     "WOODEN_BAT": "Wooden Bat",
+    "WATER_BOTTLE": "Water Bottle",
     "GUN": "Gun",
     "WOODEN_SHIELD": "Wooden Shield",
     "METAL_SHIELD": "Metal Shield",
