@@ -59,13 +59,26 @@ class Game:
 
 	def attempt_fight(self):
 		# Getting luck and bumping it up if there's a street
-		luck = -15 #self.player.luck
+		luck = self.player.luck
 		if not self.field.field[self.player.y][self.player.x].is_place():
 			luck += 15
 
 		# RNG
+		tampered = False
+		tamper_extra = 0
 		if randint(1, 100) > luck:
-			self.fight = Fight(self.player, Enemy(self.player))
+			enemy = Enemy(self.player)
+			# enemy.defense = self.player.defense # uncomment this if you want to test an infinite battle
+			# enemy.attack = self.player.attack # this too
+			if enemy.attack <= self.player.defense and self.player.defense >= enemy.attack:
+				print("You feel a bit stronger... Just for a while...")
+				tamper_extra = abs(self.player.attack - enemy.attack) + randint(1, 4)
+				self.player.attack += tamper_extra
+				tampered = True
+			self.fight = Fight(self.player, enemy)
+
+			if tampered:
+				self.player.attack -= tamper_extra
 
 
 
