@@ -40,6 +40,7 @@ class Place:
 				"POTATO": 0,
 				"DICE_OF_FATE": 0,
 				"MEDKIT": 0,
+				"WATER_BOTTLE": 0,
 				"DAGGER": 0,
 				"WOODEN_BAT": 0,
 				"GUN": 0,
@@ -86,21 +87,19 @@ class Place:
 					if exact_item.item_type == "consumable":  # checking if consumable
 						player.consumables.append(exact_item)
 						self.contents.remove(exact_item)
-						print("Taken. You now have more consumables.")
 					else:
 						if len(player.inventory) < 2:
 							player.inventory.append(exact_item)  # otherwise
 							self.contents.remove(exact_item)
 
 							# Notifying
-							print("Taken. Your inventory has been updated.")
 						else:
 							coltext.alarm("You can only hold 2 equippable items. Life is unfair.")
+				print("Taken. You now have more consumables.")
 			else:
 				coltext.alarm("That's way too much...")
 		else:
 			coltext.alarm("You can't pick up something that isn't here in the first place.")
 
-
-	# def make_decisive(self): NOT YET
-	# 	self.contents.append(WaterBottle())
+	def make_decisive(self, player):
+		self.contents.append(WaterBottle(player))
